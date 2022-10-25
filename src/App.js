@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+
+import { Home } from "./views/Home";
+import { Carrito } from "./views/Carrito";
+import { Description } from "./views/Description";
+import { DataProvider, DataCarritoProvider } from './DataContext';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <DataProvider>
+          <DataCarritoProvider>
+            <BrowserRouter>
+              <Navbar />
+
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/carrito" element={<Carrito />} />
+                <Route path="/desciption/:id" element={<Description />} />
+              </Routes>
+            </BrowserRouter>
+          </DataCarritoProvider>
+      </DataProvider>
     </div>
   );
 }
